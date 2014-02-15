@@ -30,11 +30,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *viewController = self.window.rootViewController;
     
-    UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:identifier];
-    
-    nav.topViewController.managedObjectContext = self.coreData.managedObjectContext;
+    viewController.managedObjectContext = self.coreData.managedObjectContext;
 
     return YES;
 }

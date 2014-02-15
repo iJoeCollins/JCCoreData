@@ -21,6 +21,10 @@
 		D800EA6318AF0DDD00BA682A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D800EA4518AF0DDD00BA682A /* UIKit.framework */; };
 		D800EA6B18AF0DDD00BA682A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D800EA6918AF0DDD00BA682A /* InfoPlist.strings */; };
 		D800EA6D18AF0DDD00BA682A /* Unit_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA6C18AF0DDD00BA682A /* Unit_Tests.m */; };
+		D800EA7C18AF0E1D00BA682A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D800EA7918AF0E1D00BA682A /* LICENSE */; };
+		D800EA7D18AF0E1D00BA682A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D800EA7A18AF0E1D00BA682A /* README.md */; };
+		D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA7F18AF0E6100BA682A /* JCCoreData.m */; };
+		D800EA8318AF265A00BA682A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D800EA8118AF265A00BA682A /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D800EA3718AF0DDD00BA682A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		D800EA3818AF0DDD00BA682A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		D800EA3918AF0DDD00BA682A /* gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = gitignore; sourceTree = "<group>"; };
 		D800EA3E18AF0DDD00BA682A /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D800EA4118AF0DDD00BA682A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D800EA4318AF0DDD00BA682A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -57,6 +58,11 @@
 		D800EA6A18AF0DDD00BA682A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D800EA6C18AF0DDD00BA682A /* Unit_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Unit_Tests.m; sourceTree = "<group>"; };
 		D800EA6F18AF0DDD00BA682A /* GUIDE.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = GUIDE.md; sourceTree = "<group>"; };
+		D800EA7918AF0E1D00BA682A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D800EA7A18AF0E1D00BA682A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D800EA7E18AF0E6100BA682A /* JCCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCoreData.h; sourceTree = "<group>"; };
+		D800EA7F18AF0E6100BA682A /* JCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCoreData.m; sourceTree = "<group>"; };
+		D800EA8218AF265A00BA682A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,15 +98,16 @@
 				D800EA6E18AF0DDD00BA682A /* Documentation */,
 				D800EA4018AF0DDD00BA682A /* Frameworks */,
 				D800EA3F18AF0DDD00BA682A /* Products */,
+				D800EA7918AF0E1D00BA682A /* LICENSE */,
+				D800EA7A18AF0E1D00BA682A /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
 		D800EA3618AF0DDD00BA682A /* JCCoreData */ = {
 			isa = PBXGroup;
 			children = (
-				D800EA3718AF0DDD00BA682A /* README.md */,
-				D800EA3818AF0DDD00BA682A /* LICENSE */,
-				D800EA3918AF0DDD00BA682A /* gitignore */,
+				D800EA7E18AF0E6100BA682A /* JCCoreData.h */,
+				D800EA7F18AF0E6100BA682A /* JCCoreData.m */,
 			);
 			path = JCCoreData;
 			sourceTree = "<group>";
@@ -135,6 +142,7 @@
 				D800EA5718AF0DDD00BA682A /* ViewController.m */,
 				D800EA5918AF0DDD00BA682A /* Images.xcassets */,
 				D800EA4818AF0DDD00BA682A /* Supporting Files */,
+				D800EA8118AF265A00BA682A /* Model.xcdatamodeld */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -252,9 +260,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D800EA7D18AF0E1D00BA682A /* README.md in Resources */,
 				D800EA5A18AF0DDD00BA682A /* Images.xcassets in Resources */,
 				D800EA4C18AF0DDD00BA682A /* InfoPlist.strings in Resources */,
 				D800EA5518AF0DDD00BA682A /* Main.storyboard in Resources */,
+				D800EA7C18AF0E1D00BA682A /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +285,9 @@
 			files = (
 				D800EA5818AF0DDD00BA682A /* ViewController.m in Sources */,
 				D800EA5218AF0DDD00BA682A /* AppDelegate.m in Sources */,
+				D800EA8318AF265A00BA682A /* Model.xcdatamodeld in Sources */,
 				D800EA4E18AF0DDD00BA682A /* main.m in Sources */,
+				D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +512,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D800EA8118AF265A00BA682A /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D800EA8218AF265A00BA682A /* Model.xcdatamodel */,
+			);
+			currentVersion = D800EA8218AF265A00BA682A /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D800EA3218AF0DDD00BA682A /* Project object */;
 }

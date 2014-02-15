@@ -1,39 +1,41 @@
 # Usage Guide
 
-1. Drag the files into your project and import them into your source file using, #import "JCSlider.h"
-2. If you are using IB, remember to set the class type to the slider you intend to use, i.e. JCSlider or JCStopSlider.
-3. Control drag from your slider to the source interface to wire up an IBOutlet.
-4. Configure the slider using one of the included block methods. Basic examples below.
+## Setup and Configuration
 
-### JCSlider Configuration
+1. Drag the files into your project.
+2. Add @class JCCoreData; to your .h file.
+3. Add @property (strong, nonatomic) JCCoreData *coreData;
+4. Import into your .m file using, #import "JCCoreData.h"
+5. Add the coreData accessor method to use lazy loading.
 ```objc
-- (void)configureSlider
+- (JCCoreData *)coreData
 {
-    ViewController *__weak weakSelf = self;
+    if (!_coreData) {
+        _coreData = [JCCoreData new];
+    }
     
-    [self.slider handleValueChanged:^ (int value) {
-        
-        ViewController *strongSelf = weakSelf;
-        
-        strongSelf.valueLabel.text = [NSString stringWithFormat:@"%d", value];
-    }];
+    return _coreData;
 }
 ```
 
-### JCStopSlider Configuration w/ Stop Components
-
+6. Set your view controller's managed object context either using its associated reference or a property that you set yourself.
 ```objc
-- (void)configureStopSlider
+// Set the top view controllers associated managed object context
+    navigationController.topViewController.managedObjectContext = self.coreData.managedObjectContext;
+```
+7. That's it! Just make sure and add a model file if you haven't already. Either name it "Model" or change this by editing the static variable at the top of the implementation. Future versions will allow you to set this in code.
+
+### App Delegate Example Using UINavigationController and JCCoreData Category on UIViewController
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.stopSlider.stopComponents = @[@(0), @(20), @(40), @(60)];
+    // Override point for customization after application launch.
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-     ViewController *__weak weakSelf = self;
+    UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:identifier];
     
-    [self.stopSlider handleValueChanged:^(int value) {
-        
-        ViewController *strongSelf = weakSelf;
-        
-        strongSelf.valueLabel.text = [NSString stringWithFormat:@"%d", value];
-    }];
+    nav.topViewController.managedObjectContext = self.coreData.managedObjectContext;
+
+    return YES;
 }
 ```

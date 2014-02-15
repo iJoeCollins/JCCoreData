@@ -7,13 +7,29 @@
 //
 
 #import "AppDelegate.h"
+#import "JCCoreData.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    UIViewController *viewController = self.window.rootViewController;
+    
+    viewController.managedObjectContext = self.coreData.managedObjectContext;
+    
     return YES;
+}
+
+// Lazy Loading
+- (JCCoreData *)coreData
+{
+    if (!_coreData) {
+        _coreData = [JCCoreData new];
+    }
+    
+    return _coreData;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

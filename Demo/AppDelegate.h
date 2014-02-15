@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class JCCoreData;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) JCCoreData *coreData;
 
 @end

@@ -58,8 +58,8 @@
 		D800EA6A18AF0DDD00BA682A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D800EA6C18AF0DDD00BA682A /* Unit_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Unit_Tests.m; sourceTree = "<group>"; };
 		D800EA6F18AF0DDD00BA682A /* GUIDE.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = GUIDE.md; sourceTree = "<group>"; };
-		D800EA7918AF0E1D00BA682A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		D800EA7A18AF0E1D00BA682A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D800EA7918AF0E1D00BA682A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		D800EA7A18AF0E1D00BA682A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D800EA7E18AF0E6100BA682A /* JCCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCoreData.h; sourceTree = "<group>"; };
 		D800EA7F18AF0E6100BA682A /* JCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCoreData.m; sourceTree = "<group>"; };
 		D800EA8218AF265A00BA682A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -98,8 +98,6 @@
 				D800EA6E18AF0DDD00BA682A /* Documentation */,
 				D800EA4018AF0DDD00BA682A /* Frameworks */,
 				D800EA3F18AF0DDD00BA682A /* Products */,
-				D800EA7918AF0E1D00BA682A /* LICENSE */,
-				D800EA7A18AF0E1D00BA682A /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				D800EA6F18AF0DDD00BA682A /* GUIDE.md */,
+				D800EA7918AF0E1D00BA682A /* LICENSE */,
+				D800EA7A18AF0E1D00BA682A /* README.md */,
 			);
 			path = Documentation;
 			sourceTree = "<group>";
@@ -502,6 +502,7 @@
 				D800EA7418AF0DDD00BA682A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D800EA7518AF0DDD00BA682A /* Build configuration list for PBXNativeTarget "Unit Tests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +511,7 @@
 				D800EA7718AF0DDD00BA682A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

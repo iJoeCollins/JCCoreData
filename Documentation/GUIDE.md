@@ -25,7 +25,7 @@
 ```
 7. That's it! Just make sure and add a model file if you haven't already. Either name it "Model" or change this by editing the static variable at the top of the implementation. Future versions will allow you to set this in code.
 
-### App Delegate Example Using UINavigationController and JCCoreData Category on UIViewController
+### App Delegate Example Using JCCoreData's Category on UIViewController
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

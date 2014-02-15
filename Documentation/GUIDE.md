@@ -36,4 +36,13 @@
 
     return YES;
 }
+
+- (JCCoreData *)coreData
+{
+    if (!_coreData) {
+        _coreData = [JCCoreData new];
+    }
+    
+    return _coreData;
+}
 ```

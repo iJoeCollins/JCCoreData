@@ -11,8 +11,9 @@ Uses industry best practices when accessing and passing data contexts between vi
 \#3 is an attractive approach as it allows you to conform to Apple recommendations using dependency injection as opposed to a singleton object.  It also allows you to type less...a lot less. However because of the nature of associated objects, you may find it less appealing as it will not show up in the debugger. AFAIK.
 
 Other common ways, include:
-4. Accessing the sharedApplication instance and grabbing the context from the delegate. Apple is against this as it makes dependency management a chore. Which is why they recommend DI.
-5. Getting the context from an NSManagedObject.
+
+* Accessing the sharedApplication instance and grabbing the context from the delegate. Apple is against this as it makes dependency management a chore. Which is why they recommend DI.
+* Getting the context from an NSManagedObject.
 
 
 

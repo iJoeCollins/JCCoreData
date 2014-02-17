@@ -34,8 +34,6 @@
 #import "JCCoreData.h"
 #import <objc/runtime.h>
 
-static NSString *const storeName = @"Data.sqlite";
-static NSString *const modelName = @"Model";
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 
 @implementation JCCoreData
@@ -74,8 +72,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
         return _managedObjectModel;
     }
     
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[JCCoreData applicationModelFile]];
     
     return _managedObjectModel;
 }
@@ -87,11 +84,17 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
+    BOOL dirExists = [[NSFileManager defaultManager] fileExistsAtPath:[JCCoreData applicationStoreDirectory].path];
+    
+    if (!dirExists) {
+        [[NSFileManager defaultManager] createDirectoryAtURL:[JCCoreData applicationStoreDirectory]
+                                 withIntermediateDirectories:YES attributes:nil error:nil];
+    }
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[JCCoreData storeURL] options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[JCCoreData applicationStoreFile] options:nil error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -122,6 +125,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     return _persistentStoreCoordinator;
 }
 
+
 #pragma mark - Save Context Method
 
 - (void)saveContext
@@ -131,15 +135,13 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
         }
     }
 }
 
-#pragma mark - Helper Methods
+
+#pragma mark - Shared Default Context
 
 + (NSManagedObjectContext *)defaultContext
 {
@@ -150,27 +152,43 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     }
 }
 
-+ (BOOL)firstRun
+
+#pragma mark - Store Files and Directories
+
++ (NSURL *)applicationModelFile
 {
-    // Called to check if the data store exists, if it does not, return NO to say this is the users first run.
-    return [[NSFileManager defaultManager] fileExistsAtPath:self.storeURL.path];
+    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    NSString *underscoredName = [applicationName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+
+    return [[NSBundle mainBundle] URLForResource:underscoredName withExtension:@"momd"];
 }
 
-#pragma mark - Application's Documents directory
++ (NSURL *)applicationStoreFile
+{
+    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    NSString *underscoredName = [applicationName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    NSString *storeName = [underscoredName stringByAppendingPathExtension:@"sqlite"];
+    
+    return [[JCCoreData applicationStoreDirectory] URLByAppendingPathComponent:storeName];
+}
 
 // Returns the URL to the application's Documents directory.
 + (NSURL *)applicationStoreDirectory
 {
-    NSURL *libraryDir = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask][0];
-    return [libraryDir URLByAppendingPathComponent:@"Application Data" isDirectory:YES];
+    NSURL *docDir = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
+    return [docDir URLByAppendingPathComponent:@"Application Data" isDirectory:YES];
 }
 
-+ (NSURL *)storeURL
+
+#pragma mark - Helper Methods
+
++ (BOOL)firstRun
 {
-    return [[self applicationStoreDirectory] URLByAppendingPathComponent:storeName];
+    return [[NSFileManager defaultManager] fileExistsAtPath:[JCCoreData applicationStoreFile].path];
 }
 
 @end
+
 
 #pragma mark - Categories
 
@@ -206,6 +224,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 }
 
 @end
+
 
 #pragma mark -
 

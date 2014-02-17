@@ -24,7 +24,7 @@
 		D800EA7C18AF0E1D00BA682A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D800EA7918AF0E1D00BA682A /* LICENSE */; };
 		D800EA7D18AF0E1D00BA682A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D800EA7A18AF0E1D00BA682A /* README.md */; };
 		D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA7F18AF0E6100BA682A /* JCCoreData.m */; };
-		D800EA8318AF265A00BA682A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D800EA8118AF265A00BA682A /* Model.xcdatamodeld */; };
+		D800EA8318AF265A00BA682A /* JCCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,7 @@
 		D800EA7A18AF0E1D00BA682A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D800EA7E18AF0E6100BA682A /* JCCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCoreData.h; sourceTree = "<group>"; };
 		D800EA7F18AF0E6100BA682A /* JCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCoreData.m; sourceTree = "<group>"; };
-		D800EA8218AF265A00BA682A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		D800EA8218AF265A00BA682A /* JCCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JCCoreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +140,7 @@
 				D800EA5718AF0DDD00BA682A /* ViewController.m */,
 				D800EA5918AF0DDD00BA682A /* Images.xcassets */,
 				D800EA4818AF0DDD00BA682A /* Supporting Files */,
-				D800EA8118AF265A00BA682A /* Model.xcdatamodeld */,
+				D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -285,7 +285,7 @@
 			files = (
 				D800EA5818AF0DDD00BA682A /* ViewController.m in Sources */,
 				D800EA5218AF0DDD00BA682A /* AppDelegate.m in Sources */,
-				D800EA8318AF265A00BA682A /* Model.xcdatamodeld in Sources */,
+				D800EA8318AF265A00BA682A /* JCCoreData.xcdatamodeld in Sources */,
 				D800EA4E18AF0DDD00BA682A /* main.m in Sources */,
 				D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */,
 			);
@@ -516,13 +516,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D800EA8118AF265A00BA682A /* Model.xcdatamodeld */ = {
+		D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D800EA8218AF265A00BA682A /* Model.xcdatamodel */,
+				D800EA8218AF265A00BA682A /* JCCoreData.xcdatamodel */,
 			);
-			currentVersion = D800EA8218AF265A00BA682A /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			currentVersion = D800EA8218AF265A00BA682A /* JCCoreData.xcdatamodel */;
+			path = JCCoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

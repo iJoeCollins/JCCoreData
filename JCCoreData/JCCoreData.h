@@ -42,10 +42,11 @@
 
 - (void)saveContext;
 
-+ (NSURL *)applicationStoreDirectory;
-+ (NSURL *)storeURL;
-
 + (NSManagedObjectContext *)defaultContext;
+
++ (NSURL *)applicationModelFile;
++ (NSURL *)applicationStoreFile;
++ (NSURL *)applicationStoreDirectory;
 
 + (BOOL)firstRun;
 

@@ -40,27 +40,27 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void)saveContext;
++ (instancetype)setup;
++ (instancetype)defaultData;
 
-+ (NSManagedObjectContext *)defaultContext;
-
-+ (NSURL *)applicationModelFile;
-+ (NSURL *)applicationStoreFile;
-+ (NSURL *)applicationStoreDirectory;
-
-+ (BOOL)firstRun;
+- (void)save;
 
 @end
 
+#pragma mark - Categories
+
+#pragma mark - NSManagedObject
 
 @interface NSManagedObject (JCCoreData)
 
++ (instancetype)new;
 + (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
 + (NSArray *)findAllObjects;
 + (NSArray *)findAllObjectsInContext:(NSManagedObjectContext *)context;
 
 @end
 
+#pragma mark - UIViewController
 
 @interface UIViewController (JCCoreData)
 

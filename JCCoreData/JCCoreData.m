@@ -34,13 +34,57 @@
 #import "JCCoreData.h"
 #import <objc/runtime.h>
 
-static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
+static NSString *const kJCCoreDataDefaultModelFileName = @"Model";
+static NSString *const kJCCoreDataDefaultStoreFileName = @"CoreData";
+
+@interface JCCoreData ()
++ (NSManagedObjectContext *)defaultContext;
+@end
 
 @implementation JCCoreData
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+#pragma mark - Setup Methods
+
++ (instancetype)setup
+{
+    return [self defaultData];
+}
+
+#pragma mark - Initializers and lifetime management
+
+static JCCoreData *defaultData = nil;
+
++ (JCCoreData *)defaultData
+{
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        
+        defaultData = [[JCCoreData alloc] init];
+        
+    });
+    
+    return defaultData;
+}
+
+- (instancetype)init
+{
+    if ((self = [super init])) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationWillTerminateNotification object:nil];
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - Core Data stack
 
@@ -57,8 +101,6 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     if (coordinator != nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
         _managedObjectContext.persistentStoreCoordinator = coordinator;
-        
-        defaultManagedObjectContext_ = _managedObjectContext;
     }
     
     return _managedObjectContext;
@@ -72,7 +114,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
         return _managedObjectModel;
     }
     
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[JCCoreData applicationModelFile]];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[JCCoreData defaultModelFile]];
     
     return _managedObjectModel;
 }
@@ -84,17 +126,17 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    BOOL dirExists = [[NSFileManager defaultManager] fileExistsAtPath:[JCCoreData applicationStoreDirectory].path];
+    BOOL dirExists = [[NSFileManager defaultManager] fileExistsAtPath:[JCCoreData defaultStoreDirectory].path];
     
     if (!dirExists) {
-        [[NSFileManager defaultManager] createDirectoryAtURL:[JCCoreData applicationStoreDirectory]
+        [[NSFileManager defaultManager] createDirectoryAtURL:[JCCoreData defaultStoreDirectory]
                                  withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[JCCoreData applicationStoreFile] options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[JCCoreData defaultStoreFile] options:nil error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -125,10 +167,9 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     return _persistentStoreCoordinator;
 }
 
+#pragma mark - Save Method
 
-#pragma mark - Save Context Method
-
-- (void)saveContext
+- (void)save
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
@@ -140,59 +181,65 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     }
 }
 
+#pragma mark - Default Store Files and Directories
 
-#pragma mark - Shared Default Context
-
-+ (NSManagedObjectContext *)defaultContext
-{
-    @synchronized(self) {
-        NSAssert(defaultManagedObjectContext_ != nil, @"You have not initialized the Core Data Stack!");
-        
-        return defaultManagedObjectContext_;
-    }
-}
-
-
-#pragma mark - Store Files and Directories
-
-+ (NSURL *)applicationModelFile
++ (NSURL *)defaultModelFile
 {
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    
+    if (!applicationName) {
+        applicationName = kJCCoreDataDefaultModelFileName;
+    }
+    
+    // Default templates replace any spaces in the project name with underscores
     NSString *underscoredName = [applicationName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
 
     return [[NSBundle mainBundle] URLForResource:underscoredName withExtension:@"momd"];
 }
 
-+ (NSURL *)applicationStoreFile
++ (NSURL *)defaultStoreFile
 {
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    
+    if (!applicationName) {
+        applicationName = kJCCoreDataDefaultStoreFileName;
+    }
+    
+    // Default templates replace any spaces in the project name with underscores
     NSString *underscoredName = [applicationName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    
     NSString *storeName = [underscoredName stringByAppendingPathExtension:@"sqlite"];
     
-    return [[JCCoreData applicationStoreDirectory] URLByAppendingPathComponent:storeName];
+    return [[JCCoreData defaultStoreDirectory] URLByAppendingPathComponent:storeName];
 }
 
-// Returns the URL to the application's Documents directory.
-+ (NSURL *)applicationStoreDirectory
+// Returns the URL to the default store directory: /Documents/Application Data/
++ (NSURL *)defaultStoreDirectory
 {
     NSURL *docDir = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
+    
     return [docDir URLByAppendingPathComponent:@"Application Data" isDirectory:YES];
 }
 
+#pragma mark - Helper Methdos
 
-#pragma mark - Helper Methods
-
-+ (BOOL)firstRun
++ (NSManagedObjectContext *)defaultContext
 {
-    return [[NSFileManager defaultManager] fileExistsAtPath:[JCCoreData applicationStoreFile].path];
+    return [[JCCoreData defaultData] managedObjectContext];
 }
 
 @end
 
-
 #pragma mark - Categories
 
+#pragma mark - NSManagedObject
+
 @implementation NSManagedObject (JCCoreData)
+
++ (instancetype)new
+{
+    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:[JCCoreData defaultContext]];
+}
 
 + (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
 {
@@ -226,7 +273,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 @end
 
 
-#pragma mark -
+#pragma mark - UIViewController
 
 @implementation UIViewController (JCCoreData)
 

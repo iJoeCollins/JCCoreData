@@ -14,22 +14,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-
-    UIViewController *viewController = self.window.rootViewController;
     
-    viewController.managedObjectContext = self.coreData.managedObjectContext;
+    [JCCoreData setup];
     
     return YES;
-}
-
-// Lazy Loading
-- (JCCoreData *)coreData
-{
-    if (!_coreData) {
-        _coreData = [JCCoreData new];
-    }
-    
-    return _coreData;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

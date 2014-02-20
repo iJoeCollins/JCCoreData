@@ -3,27 +3,24 @@
 ## Setup and Configuration
 
 1. Drag the files into your project.
-2. Add @class JCCoreData; to your .h file.
-3. Add @property (strong, nonatomic) JCCoreData *coreData;
-4. Import into your .m file using, #import "JCCoreData.h"
-5. Add the coreData accessor method to use lazy loading.
+2. Import into your prefix file using, #import "JCCoreData.h"
+
+### Basic App Delegate Example
 ```objc
-- (JCCoreData *)coreData
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    if (!_coreData) {
-        _coreData = [JCCoreData new];
-    }
-    
-    return _coreData;
+    // Override point for customization after application launch.
+
+    // Setup the default Core Data stack.
+    [JCCoreData setup];
+
+    return YES;
 }
 ```
-
-6. Set your view controller's managed object context either using its associated reference or a property that you set yourself.
-```objc
-// Set the top view controllers associated managed object context
-    navigationController.topViewController.managedObjectContext = self.coreData.managedObjectContext;
-```
-7. That's it! Just make sure and add a model file if you haven't already. Either name it "Model" or change this by editing the static variable at the top of the implementation. Future versions will allow you to set this in code.
+The setup method in the above example does a few things. 
+* It instantiates a singleton instance that can be accessed using [JCCoreData defaultData].
+* Registers itself as an observer of UIApplicationWillTerminateNotification (For the purposes of making sure the default context is saved when the application is closed.)
+* The setup of the core data stack doesn't actually occur here as we want to delay this until it is actually needed. Which may very well be in the App Delegate, but for the purposes of this example it is not. Just using Core Data later on such as creating a new object will setup the default stack.
 
 ### App Delegate Example Using JCCoreData's Category on UIViewController
 ```objc
@@ -32,17 +29,30 @@
     // Override point for customization after application launch.
     UIViewController *viewController = self.window.rootViewController;
     
-    viewController.managedObjectContext = self.coreData.managedObjectContext;
+    viewController.managedObjectContext = [JCCoreData defaultContext];
 
     return YES;
 }
-
-- (JCCoreData *)coreData
-{
-    if (!_coreData) {
-        _coreData = [JCCoreData new];
-    }
-    
-    return _coreData;
-}
 ```
+The setup method above does the exact same thing as just calling "setup", but it also sets up the default stack and returns an instance of the default managed object context.
+**NOTE:** Something here that is not readily apparent is that I am using a category on UIViewController to add a managedObjectContext property to all objects that inherit from UIViewController. This is done using "Associated References" and the objective c runtime.
+
+Having both pros and cons it is just a matter of context when you might decide to use this setup.  It saves me the hassle of having to import view controller subclasses and add core data boiler plate properties to everything. It really doesn't matter what the rootViewController is, it just works. However if it is a container class, you may want to use the correct subclass so you may call for example navigationController.topViewController.managedObjectContext.
+
+Cons would be...because these are associated references setup during runtime, they obviously don't show up in the debugger. Correct me if I am wrong, but I haven't been able to find them! Lol. This just means you have to go about it a little differently if you want a pointer showing up there.
+
+## NSManagedObject Category
+
+Provides a bunch of useful helper methods to insert new objects, find objects, etc.
+
+### NSManagedObject Instantiation example "Before/After JCCoreData"
+```objc
+// Before
+CustomObject *object = [NSEntityDescription insertNewObjectForEntityForName:@"CustomObject" inManagedObjectContext:self.managedObjectContext];
+
+// Now with JCCoreData
+CustomObject *object = [CustomObject new];
+```
+
+:]
+

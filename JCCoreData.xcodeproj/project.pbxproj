@@ -52,7 +52,7 @@
 		D800EA5618AF0DDD00BA682A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D800EA5718AF0DDD00BA682A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D800EA5918AF0DDD00BA682A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D800EA5F18AF0DDD00BA682A /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D800EA5F18AF0DDD00BA682A /* JCCoreDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JCCoreDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D800EA6018AF0DDD00BA682A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D800EA6818AF0DDD00BA682A /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		D800EA6A18AF0DDD00BA682A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				D800EA3E18AF0DDD00BA682A /* Demo.app */,
-				D800EA5F18AF0DDD00BA682A /* Unit Tests.xctest */,
+				D800EA5F18AF0DDD00BA682A /* JCCoreDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,7 +219,7 @@
 			);
 			name = JCCoreDataTests;
 			productName = "Unit Tests";
-			productReference = D800EA5F18AF0DDD00BA682A /* Unit Tests.xctest */;
+			productReference = D800EA5F18AF0DDD00BA682A /* JCCoreDataTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */

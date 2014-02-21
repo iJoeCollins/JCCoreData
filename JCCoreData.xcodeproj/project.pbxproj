@@ -204,9 +204,9 @@
 			productReference = D800EA3E18AF0DDD00BA682A /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D800EA5E18AF0DDD00BA682A /* Unit Tests */ = {
+		D800EA5E18AF0DDD00BA682A /* JCCoreDataTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D800EA7518AF0DDD00BA682A /* Build configuration list for PBXNativeTarget "Unit Tests" */;
+			buildConfigurationList = D800EA7518AF0DDD00BA682A /* Build configuration list for PBXNativeTarget "JCCoreDataTests" */;
 			buildPhases = (
 				D800EA5B18AF0DDD00BA682A /* Sources */,
 				D800EA5C18AF0DDD00BA682A /* Frameworks */,
@@ -217,7 +217,7 @@
 			dependencies = (
 				D800EA6518AF0DDD00BA682A /* PBXTargetDependency */,
 			);
-			name = "Unit Tests";
+			name = JCCoreDataTests;
 			productName = "Unit Tests";
 			productReference = D800EA5F18AF0DDD00BA682A /* Unit Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -250,7 +250,7 @@
 			projectRoot = "";
 			targets = (
 				D800EA3D18AF0DDD00BA682A /* Demo */,
-				D800EA5E18AF0DDD00BA682A /* Unit Tests */,
+				D800EA5E18AF0DDD00BA682A /* JCCoreDataTests */,
 			);
 		};
 /* End PBXProject section */
@@ -504,7 +504,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D800EA7518AF0DDD00BA682A /* Build configuration list for PBXNativeTarget "Unit Tests" */ = {
+		D800EA7518AF0DDD00BA682A /* Build configuration list for PBXNativeTarget "JCCoreDataTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D800EA7618AF0DDD00BA682A /* Debug */,

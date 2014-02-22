@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "JCCoreData.h"
 #import "AuthorsViewController.h"
 
 @interface AppDelegate ()

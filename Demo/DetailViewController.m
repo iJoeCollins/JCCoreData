@@ -27,6 +27,8 @@
 
 @implementation DetailViewController
 
+@synthesize undoManager;
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];

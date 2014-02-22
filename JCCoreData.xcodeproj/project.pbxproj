@@ -23,12 +23,13 @@
 		D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA7F18AF0E6100BA682A /* JCCoreData.m */; };
 		D800EA8318AF265A00BA682A /* JCCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */; };
 		D833709F18B838CF00FB0811 /* JCCoreData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D833709E18B838CF00FB0811 /* JCCoreData.sqlite */; };
-		D83370A218B8397900FB0811 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D83370A118B8397900FB0811 /* Main.storyboard */; };
 		D83370A518B8443700FB0811 /* AuthorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370A418B8443700FB0811 /* AuthorsViewController.m */; };
 		D83370A818B8446200FB0811 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370A718B8446200FB0811 /* DetailViewController.m */; };
 		D83370AB18B8447900FB0811 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370AA18B8447900FB0811 /* AddViewController.m */; };
 		D83370AE18B8448E00FB0811 /* EditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370AD18B8448E00FB0811 /* EditingViewController.m */; };
 		D83370B318B8480E00FB0811 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370B218B8480E00FB0811 /* Book.m */; };
+		D8958AF018B94CF800506AD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8958AF218B94CF800506AD5 /* Localizable.strings */; };
+		D8958AF318B94DB200506AD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8958AEF18B94CF000506AD5 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +65,6 @@
 		D800EA7F18AF0E6100BA682A /* JCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCoreData.m; sourceTree = "<group>"; };
 		D800EA8218AF265A00BA682A /* JCCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JCCoreData.xcdatamodel; sourceTree = "<group>"; };
 		D833709E18B838CF00FB0811 /* JCCoreData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = JCCoreData.sqlite; sourceTree = "<group>"; };
-		D83370A118B8397900FB0811 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D83370A318B8443700FB0811 /* AuthorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsViewController.h; sourceTree = "<group>"; };
 		D83370A418B8443700FB0811 /* AuthorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorsViewController.m; sourceTree = "<group>"; };
 		D83370A618B8446200FB0811 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -75,6 +75,8 @@
 		D83370AD18B8448E00FB0811 /* EditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingViewController.m; sourceTree = "<group>"; };
 		D83370B118B8480E00FB0811 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		D83370B218B8480E00FB0811 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
+		D8958AEE18B94CF000506AD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D8958AF118B94CF800506AD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,10 +197,11 @@
 		D83370A018B838E700FB0811 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D8958AEF18B94CF000506AD5 /* Main.storyboard */,
+				D8958AF218B94CF800506AD5 /* Localizable.strings */,
 				D800EA5918AF0DDD00BA682A /* Images.xcassets */,
 				D833709E18B838CF00FB0811 /* JCCoreData.sqlite */,
 				D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */,
-				D83370A118B8397900FB0811 /* Main.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -312,8 +315,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8958AF318B94DB200506AD5 /* Main.storyboard in Resources */,
 				D800EA7D18AF0E1D00BA682A /* README.md in Resources */,
-				D83370A218B8397900FB0811 /* Main.storyboard in Resources */,
+				D8958AF018B94CF800506AD5 /* Localizable.strings in Resources */,
 				D800EA5A18AF0DDD00BA682A /* Images.xcassets in Resources */,
 				D800EA7C18AF0E1D00BA682A /* LICENSE in Resources */,
 				D833709F18B838CF00FB0811 /* JCCoreData.sqlite in Resources */,
@@ -372,6 +376,22 @@
 				D800EA6A18AF0DDD00BA682A /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D8958AEF18B94CF000506AD5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8958AEE18B94CF000506AD5 /* en */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D8958AF218B94CF800506AD5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8958AF118B94CF800506AD5 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

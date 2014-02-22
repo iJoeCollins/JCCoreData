@@ -8,7 +8,7 @@
 
 #import "AddViewController.h"
 
-@interface AuthorsViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddViewControllerDelegate>
+@interface AuthorsViewController : UITableViewController <AddViewControllerDelegate>
 
 
 @end

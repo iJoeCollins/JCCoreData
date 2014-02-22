@@ -54,5 +54,69 @@ CustomObject *object = [NSEntityDescription insertNewObjectForEntityForName:@"Cu
 CustomObject *object = [CustomObject new];
 ```
 
+### NSFetchedResultsController setup and instantiation
+
+##### Before
+```objc
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    // Set up the edit and add buttons.
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    // Create and configure a fetch request with the Book entity.
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Book" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Create the sort descriptors array.
+    NSSortDescriptor *authorDescriptor = [[NSSortDescriptor alloc] initWithKey:@"author" ascending:NO];
+    NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = @[authorDescriptor, titleDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Create and initialize the fetch results controller.
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"author" cacheName:@"Root"];
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}    
+```
+
+##### After
+```objc
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    // Set up the edit and add buttons.
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    self.fetchedResultsController = [Book fetchAllWithDelegate:self sortedBy:@"author:NO,title" groupedBy:@"author" cached:YES];
+}
+```
+
+Note: the sortedBy: parameter takes a string in the format @"key:ascending,key:ascending". You may also leave off the :ascending as the default is set to YES.
+
+Also of major note, a category is setup on UITableViewController that implements standard NSFetchedResultsControllerDelegate methods. So if you don't have to do anything special, just don't worry about it anymore. The table views will update on their own with JCCoreData.
+
 :]
 

@@ -10,11 +10,8 @@
 		D800EA4218AF0DDD00BA682A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D800EA4118AF0DDD00BA682A /* Foundation.framework */; };
 		D800EA4418AF0DDD00BA682A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D800EA4318AF0DDD00BA682A /* CoreGraphics.framework */; };
 		D800EA4618AF0DDD00BA682A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D800EA4518AF0DDD00BA682A /* UIKit.framework */; };
-		D800EA4C18AF0DDD00BA682A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D800EA4A18AF0DDD00BA682A /* InfoPlist.strings */; };
 		D800EA4E18AF0DDD00BA682A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA4D18AF0DDD00BA682A /* main.m */; };
 		D800EA5218AF0DDD00BA682A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA5118AF0DDD00BA682A /* AppDelegate.m */; };
-		D800EA5518AF0DDD00BA682A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D800EA5318AF0DDD00BA682A /* Main.storyboard */; };
-		D800EA5818AF0DDD00BA682A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA5718AF0DDD00BA682A /* ViewController.m */; };
 		D800EA5A18AF0DDD00BA682A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D800EA5918AF0DDD00BA682A /* Images.xcassets */; };
 		D800EA6118AF0DDD00BA682A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D800EA6018AF0DDD00BA682A /* XCTest.framework */; };
 		D800EA6218AF0DDD00BA682A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D800EA4118AF0DDD00BA682A /* Foundation.framework */; };
@@ -25,6 +22,13 @@
 		D800EA7D18AF0E1D00BA682A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D800EA7A18AF0E1D00BA682A /* README.md */; };
 		D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA7F18AF0E6100BA682A /* JCCoreData.m */; };
 		D800EA8318AF265A00BA682A /* JCCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */; };
+		D833709F18B838CF00FB0811 /* CoreDataBooks.CDBStore in Resources */ = {isa = PBXBuildFile; fileRef = D833709E18B838CF00FB0811 /* CoreDataBooks.CDBStore */; };
+		D83370A218B8397900FB0811 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D83370A118B8397900FB0811 /* Main.storyboard */; };
+		D83370A518B8443700FB0811 /* AuthorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370A418B8443700FB0811 /* AuthorsViewController.m */; };
+		D83370A818B8446200FB0811 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370A718B8446200FB0811 /* DetailViewController.m */; };
+		D83370AB18B8447900FB0811 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370AA18B8447900FB0811 /* AddViewController.m */; };
+		D83370AE18B8448E00FB0811 /* EditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370AD18B8448E00FB0811 /* EditingViewController.m */; };
+		D83370B318B8480E00FB0811 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370B218B8480E00FB0811 /* Book.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,14 +47,10 @@
 		D800EA4318AF0DDD00BA682A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D800EA4518AF0DDD00BA682A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D800EA4918AF0DDD00BA682A /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Demo-Info.plist"; sourceTree = "<group>"; };
-		D800EA4B18AF0DDD00BA682A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D800EA4D18AF0DDD00BA682A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D800EA4F18AF0DDD00BA682A /* Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Prefix.pch"; sourceTree = "<group>"; };
 		D800EA5018AF0DDD00BA682A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D800EA5118AF0DDD00BA682A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D800EA5418AF0DDD00BA682A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D800EA5618AF0DDD00BA682A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D800EA5718AF0DDD00BA682A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D800EA5918AF0DDD00BA682A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D800EA5F18AF0DDD00BA682A /* JCCoreDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JCCoreDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D800EA6018AF0DDD00BA682A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -63,6 +63,18 @@
 		D800EA7E18AF0E6100BA682A /* JCCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCoreData.h; sourceTree = "<group>"; };
 		D800EA7F18AF0E6100BA682A /* JCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCoreData.m; sourceTree = "<group>"; };
 		D800EA8218AF265A00BA682A /* JCCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JCCoreData.xcdatamodel; sourceTree = "<group>"; };
+		D833709E18B838CF00FB0811 /* CoreDataBooks.CDBStore */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataBooks.CDBStore; sourceTree = "<group>"; };
+		D83370A118B8397900FB0811 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D83370A318B8443700FB0811 /* AuthorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsViewController.h; sourceTree = "<group>"; };
+		D83370A418B8443700FB0811 /* AuthorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorsViewController.m; sourceTree = "<group>"; };
+		D83370A618B8446200FB0811 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		D83370A718B8446200FB0811 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		D83370A918B8447900FB0811 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		D83370AA18B8447900FB0811 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		D83370AC18B8448E00FB0811 /* EditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditingViewController.h; sourceTree = "<group>"; };
+		D83370AD18B8448E00FB0811 /* EditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingViewController.m; sourceTree = "<group>"; };
+		D83370B118B8480E00FB0811 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		D83370B218B8480E00FB0811 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,14 +145,11 @@
 		D800EA4718AF0DDD00BA682A /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				D800EA5018AF0DDD00BA682A /* AppDelegate.h */,
-				D800EA5118AF0DDD00BA682A /* AppDelegate.m */,
-				D800EA5318AF0DDD00BA682A /* Main.storyboard */,
-				D800EA5618AF0DDD00BA682A /* ViewController.h */,
-				D800EA5718AF0DDD00BA682A /* ViewController.m */,
-				D800EA5918AF0DDD00BA682A /* Images.xcassets */,
+				D83370B018B844C400FB0811 /* Application Delegate */,
+				D83370AF18B844A400FB0811 /* View Controllers */,
+				D83370B418B8482700FB0811 /* Model Classes */,
+				D83370A018B838E700FB0811 /* Resources */,
 				D800EA4818AF0DDD00BA682A /* Supporting Files */,
-				D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -149,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				D800EA4918AF0DDD00BA682A /* Demo-Info.plist */,
-				D800EA4A18AF0DDD00BA682A /* InfoPlist.strings */,
 				D800EA4D18AF0DDD00BA682A /* main.m */,
 				D800EA4F18AF0DDD00BA682A /* Demo-Prefix.pch */,
 			);
@@ -182,6 +190,50 @@
 				D800EA7A18AF0E1D00BA682A /* README.md */,
 			);
 			path = Documentation;
+			sourceTree = "<group>";
+		};
+		D83370A018B838E700FB0811 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D800EA5918AF0DDD00BA682A /* Images.xcassets */,
+				D833709E18B838CF00FB0811 /* CoreDataBooks.CDBStore */,
+				D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */,
+				D83370A118B8397900FB0811 /* Main.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D83370AF18B844A400FB0811 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D83370A318B8443700FB0811 /* AuthorsViewController.h */,
+				D83370A418B8443700FB0811 /* AuthorsViewController.m */,
+				D83370A618B8446200FB0811 /* DetailViewController.h */,
+				D83370A718B8446200FB0811 /* DetailViewController.m */,
+				D83370A918B8447900FB0811 /* AddViewController.h */,
+				D83370AA18B8447900FB0811 /* AddViewController.m */,
+				D83370AC18B8448E00FB0811 /* EditingViewController.h */,
+				D83370AD18B8448E00FB0811 /* EditingViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D83370B018B844C400FB0811 /* Application Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				D800EA5018AF0DDD00BA682A /* AppDelegate.h */,
+				D800EA5118AF0DDD00BA682A /* AppDelegate.m */,
+			);
+			name = "Application Delegate";
+			sourceTree = "<group>";
+		};
+		D83370B418B8482700FB0811 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D83370B118B8480E00FB0811 /* Book.h */,
+				D83370B218B8480E00FB0811 /* Book.m */,
+			);
+			name = "Model Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,10 +313,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D800EA7D18AF0E1D00BA682A /* README.md in Resources */,
+				D83370A218B8397900FB0811 /* Main.storyboard in Resources */,
 				D800EA5A18AF0DDD00BA682A /* Images.xcassets in Resources */,
-				D800EA4C18AF0DDD00BA682A /* InfoPlist.strings in Resources */,
-				D800EA5518AF0DDD00BA682A /* Main.storyboard in Resources */,
 				D800EA7C18AF0E1D00BA682A /* LICENSE in Resources */,
+				D833709F18B838CF00FB0811 /* CoreDataBooks.CDBStore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,11 +335,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D800EA5818AF0DDD00BA682A /* ViewController.m in Sources */,
 				D800EA5218AF0DDD00BA682A /* AppDelegate.m in Sources */,
+				D83370B318B8480E00FB0811 /* Book.m in Sources */,
 				D800EA8318AF265A00BA682A /* JCCoreData.xcdatamodeld in Sources */,
 				D800EA4E18AF0DDD00BA682A /* main.m in Sources */,
+				D83370AB18B8447900FB0811 /* AddViewController.m in Sources */,
+				D83370A518B8443700FB0811 /* AuthorsViewController.m in Sources */,
+				D83370AE18B8448E00FB0811 /* EditingViewController.m in Sources */,
 				D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */,
+				D83370A818B8446200FB0811 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,22 +366,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D800EA4A18AF0DDD00BA682A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D800EA4B18AF0DDD00BA682A /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D800EA5318AF0DDD00BA682A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D800EA5418AF0DDD00BA682A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D800EA6918AF0DDD00BA682A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

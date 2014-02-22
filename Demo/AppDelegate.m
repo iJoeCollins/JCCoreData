@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "JCCoreData.h"
-#import "AuthorsViewController.h"
 
 @implementation AppDelegate
 
@@ -17,11 +16,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
     // Setup Core Data
-    JCCoreData *coreData = [JCCoreData defaultData];
-    
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    AuthorsViewController *authorsViewController = (AuthorsViewController *)[[navigationController viewControllers] objectAtIndex:0];
-    authorsViewController.managedObjectContext = coreData.managedObjectContext;
+    [JCCoreData setup];
 }
 
 @end

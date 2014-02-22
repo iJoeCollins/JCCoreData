@@ -8,9 +8,6 @@
 
 #import "AddViewController.h"
 
-@interface AddViewController ()
-
-@end
 
 @implementation AddViewController
 

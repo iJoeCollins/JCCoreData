@@ -22,7 +22,7 @@
 		D800EA7D18AF0E1D00BA682A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D800EA7A18AF0E1D00BA682A /* README.md */; };
 		D800EA8018AF0E6100BA682A /* JCCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = D800EA7F18AF0E6100BA682A /* JCCoreData.m */; };
 		D800EA8318AF265A00BA682A /* JCCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */; };
-		D833709F18B838CF00FB0811 /* CoreDataBooks.CDBStore in Resources */ = {isa = PBXBuildFile; fileRef = D833709E18B838CF00FB0811 /* CoreDataBooks.CDBStore */; };
+		D833709F18B838CF00FB0811 /* JCCoreData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D833709E18B838CF00FB0811 /* JCCoreData.sqlite */; };
 		D83370A218B8397900FB0811 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D83370A118B8397900FB0811 /* Main.storyboard */; };
 		D83370A518B8443700FB0811 /* AuthorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370A418B8443700FB0811 /* AuthorsViewController.m */; };
 		D83370A818B8446200FB0811 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83370A718B8446200FB0811 /* DetailViewController.m */; };
@@ -63,7 +63,7 @@
 		D800EA7E18AF0E6100BA682A /* JCCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCoreData.h; sourceTree = "<group>"; };
 		D800EA7F18AF0E6100BA682A /* JCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCoreData.m; sourceTree = "<group>"; };
 		D800EA8218AF265A00BA682A /* JCCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JCCoreData.xcdatamodel; sourceTree = "<group>"; };
-		D833709E18B838CF00FB0811 /* CoreDataBooks.CDBStore */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataBooks.CDBStore; sourceTree = "<group>"; };
+		D833709E18B838CF00FB0811 /* JCCoreData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = JCCoreData.sqlite; sourceTree = "<group>"; };
 		D83370A118B8397900FB0811 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D83370A318B8443700FB0811 /* AuthorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsViewController.h; sourceTree = "<group>"; };
 		D83370A418B8443700FB0811 /* AuthorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorsViewController.m; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				D800EA5918AF0DDD00BA682A /* Images.xcassets */,
-				D833709E18B838CF00FB0811 /* CoreDataBooks.CDBStore */,
+				D833709E18B838CF00FB0811 /* JCCoreData.sqlite */,
 				D800EA8118AF265A00BA682A /* JCCoreData.xcdatamodeld */,
 				D83370A118B8397900FB0811 /* Main.storyboard */,
 			);
@@ -316,7 +316,7 @@
 				D83370A218B8397900FB0811 /* Main.storyboard in Resources */,
 				D800EA5A18AF0DDD00BA682A /* Images.xcassets in Resources */,
 				D800EA7C18AF0E1D00BA682A /* LICENSE in Resources */,
-				D833709F18B838CF00FB0811 /* CoreDataBooks.CDBStore in Resources */,
+				D833709F18B838CF00FB0811 /* JCCoreData.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

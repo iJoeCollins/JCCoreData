@@ -36,6 +36,7 @@
 
 static NSString *const kJCCoreDataDefaultModelFileName = @"Model";
 static NSString *const kJCCoreDataDefaultStoreFileName = @"CoreData";
+static NSString *const kJCCoreDataStoreFileExt = @"sqlite";
 
 @interface JCCoreData ()
 + (NSManagedObjectContext *)defaultContext;
@@ -74,6 +75,7 @@ static JCCoreData *defaultData = nil;
 - (instancetype)init
 {
     if ((self = [super init])) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationWillTerminateNotification object:nil];
     }
@@ -133,10 +135,24 @@ static JCCoreData *defaultData = nil;
                                  withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
+    NSURL *storeURL = [JCCoreData defaultStoreFile];
+    
+    // Check if store file exists in main bundle
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // If the expected store doesn't exist, copy the default store.
+    if (![fileManager fileExistsAtPath:[storeURL path]]) {
+        NSString *resource = [[storeURL lastPathComponent] stringByDeletingPathExtension];
+        NSURL *defaultStoreURL = [[NSBundle mainBundle] URLForResource:resource withExtension:kJCCoreDataStoreFileExt];
+        
+        if (defaultStoreURL) {
+            [fileManager copyItemAtURL:defaultStoreURL toURL:storeURL error:NULL];
+        }
+    }
+
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[JCCoreData defaultStoreFile] options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -208,7 +224,7 @@ static JCCoreData *defaultData = nil;
     // Default templates replace any spaces in the project name with underscores
     NSString *underscoredName = [applicationName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     
-    NSString *storeName = [underscoredName stringByAppendingPathExtension:@"sqlite"];
+    NSString *storeName = [underscoredName stringByAppendingPathExtension:kJCCoreDataStoreFileExt];
     
     return [[JCCoreData defaultStoreDirectory] URLByAppendingPathComponent:storeName];
 }

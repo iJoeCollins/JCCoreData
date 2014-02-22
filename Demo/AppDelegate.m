@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "JCCoreData.h"
+#import "AuthorsViewController.h"
 
 @implementation AppDelegate
 
@@ -15,8 +16,14 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
+    // Override point for customization after application launch.
+    
     // Setup Core Data
-    [JCCoreData setup];
+    JCCoreData *coreData = [JCCoreData defaultData];
+    
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    AuthorsViewController *authorsViewController = (AuthorsViewController *)[[navigationController viewControllers] objectAtIndex:0];
+    authorsViewController.managedObjectContext = coreData.managedObjectContext;
 }
 
 @end

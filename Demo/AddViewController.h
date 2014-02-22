@@ -6,8 +6,20 @@
 //  Copyright (c) 2014 Joseph Collins. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 
-@interface AddViewController : UITableViewController
+@protocol AddViewControllerDelegate;
+
+
+@interface AddViewController : DetailViewController
+
+@property (nonatomic, weak) id <AddViewControllerDelegate> delegate;
+
+@end
+
+
+@protocol AddViewControllerDelegate
+
+- (void)addViewController:(AddViewController *)controller didFinishWithSave:(BOOL)save;
 
 @end

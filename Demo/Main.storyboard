@@ -25,6 +25,10 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="k7y-sq-4yt" id="fWZ-q4-3oX"/>
+                            <outlet property="delegate" destination="k7y-sq-4yt" id="X5R-Jx-JZ6"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Authors" id="pNn-7v-al7">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Yku-u8-YwQ">
@@ -131,6 +135,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Info" id="cxi-pq-De3"/>
                     <connections>
+                        <outlet property="authorLabel" destination="oJl-uB-nsl" id="MOQ-f2-eF3"/>
+                        <outlet property="copyrightLabel" destination="7bt-Jj-GJ7" id="6bL-xD-JEY"/>
+                        <outlet property="titleLabel" destination="dG0-NN-RvT" id="i37-5h-dcx"/>
                         <segue destination="MzQ-qR-iCe" kind="push" identifier="EditSelectedItem" id="8dG-wl-H1c"/>
                     </connections>
                 </tableViewController>
@@ -189,9 +196,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Editing" id="tFe-CH-4p3">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jMz-og-eR7"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ypt-8M-Ch7"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jMz-og-eR7">
+                            <connections>
+                                <action selector="cancel:" destination="MzQ-qR-iCe" id="5nT-CN-nN9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ypt-8M-Ch7">
+                            <connections>
+                                <action selector="save:" destination="MzQ-qR-iCe" id="hfu-Pt-z1e"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="kWg-mo-QSV" id="CbH-G4-sDA"/>
+                        <outlet property="textField" destination="dX3-ob-0tZ" id="rJo-og-FHI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BKN-fy-i1o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -285,10 +304,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </sections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Book" id="Kif-Qh-WAz">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="K5S-6O-aeL"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="PBH-Mk-HTd"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="K5S-6O-aeL">
+                            <connections>
+                                <action selector="cancel:" destination="Ztl-Jx-0uO" id="yKK-L0-kPb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="PBH-Mk-HTd">
+                            <connections>
+                                <action selector="save:" destination="Ztl-Jx-0uO" id="2Vw-zE-Bga"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="authorLabel" destination="t0o-ii-bGo" id="7Xh-tv-Sa0"/>
+                        <outlet property="copyrightLabel" destination="waC-Dj-e7O" id="xu6-4I-395"/>
+                        <outlet property="titleLabel" destination="Gh7-db-Pd9" id="rup-YR-fE0"/>
                         <segue destination="MzQ-qR-iCe" kind="push" identifier="EditSelectedItem" id="L5B-CK-K6d"/>
                     </connections>
                 </tableViewController>
@@ -333,6 +363,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8dG-wl-H1c"/>
+        <segue reference="L5B-CK-K6d"/>
     </inferredMetricsTieBreakers>
 </document>

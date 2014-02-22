@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Joseph Collins. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AddViewController.h"
 
-@interface AuthorsViewController : UITableViewController
+@interface AuthorsViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddViewControllerDelegate>
+
 
 @end

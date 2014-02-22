@@ -52,10 +52,32 @@
 
 @interface NSManagedObject (JCCoreData)
 
+// Create Objects
 + (instancetype)new;
-+ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
++ (instancetype)newInContext:(NSManagedObjectContext *)context;
+
+// Delete Objects
+- (void)delete;
+
+// Get Objects
 + (NSArray *)findAllObjects;
 + (NSArray *)findAllObjectsInContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *)fetchAllWithDelegate:(id <NSFetchedResultsControllerDelegate>)delegate sortedBy:(NSString *)sortTerm groupedBy:(NSString *)groupTerm cached:(BOOL)isCached;
+
+// Get Objects Entity Descriptions
++ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
+
+@end
+
+#pragma mark - NSFetchedResultsController
+
+@interface NSFetchedResultsController (JCCoreData)
+- (NSUInteger)numberOfRowsInSection:(NSInteger)section;
+@end
+
+#pragma mark - UITableViewController
+
+@interface UITableViewController (JCCoreData) <NSFetchedResultsControllerDelegate>
 
 @end
 

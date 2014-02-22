@@ -34,8 +34,10 @@
 #import "JCCoreData.h"
 #import <objc/runtime.h>
 
-static NSString *const kJCCoreDataDefaultModelFileName = @"Model";
-static NSString *const kJCCoreDataDefaultStoreFileName = @"CoreData";
+static NSString *const kJCCoreDataModelFileName = @"Model";
+static NSString *const kJCCoreDataStoreFileName = @"CoreData";
+static NSString *const kJCCoreDataStoreFileExt = @"sqlite";
+static NSUInteger kJCCoreDataBatchSize = 20;
 
 @interface JCCoreData ()
 + (NSManagedObjectContext *)defaultContext;
@@ -74,6 +76,7 @@ static JCCoreData *defaultData = nil;
 - (instancetype)init
 {
     if ((self = [super init])) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationWillTerminateNotification object:nil];
     }
@@ -99,7 +102,7 @@ static JCCoreData *defaultData = nil;
     NSPersistentStoreCoordinator *coordinator = self.persistentStoreCoordinator;
     
     if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         _managedObjectContext.persistentStoreCoordinator = coordinator;
     }
     
@@ -133,35 +136,26 @@ static JCCoreData *defaultData = nil;
                                  withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
+    NSURL *storeURL = [JCCoreData defaultStoreFile];
+    
+    // Check if store file exists in main bundle
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // If the expected store doesn't exist, copy the default store.
+    if (![fileManager fileExistsAtPath:[storeURL path]]) {
+        NSString *resource = [[storeURL lastPathComponent] stringByDeletingPathExtension];
+        NSURL *defaultStoreURL = [[NSBundle mainBundle] URLForResource:resource withExtension:kJCCoreDataStoreFileExt];
+        
+        if (defaultStoreURL) {
+            [fileManager copyItemAtURL:defaultStoreURL toURL:storeURL error:NULL];
+        }
+    }
+
     NSError *error = nil;
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[JCCoreData defaultStoreFile] options:nil error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
     }
     
     return _persistentStoreCoordinator;
@@ -188,7 +182,7 @@ static JCCoreData *defaultData = nil;
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     
     if (!applicationName) {
-        applicationName = kJCCoreDataDefaultModelFileName;
+        applicationName = kJCCoreDataModelFileName;
     }
     
     // Default templates replace any spaces in the project name with underscores
@@ -202,13 +196,13 @@ static JCCoreData *defaultData = nil;
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     
     if (!applicationName) {
-        applicationName = kJCCoreDataDefaultStoreFileName;
+        applicationName = kJCCoreDataStoreFileName;
     }
     
     // Default templates replace any spaces in the project name with underscores
     NSString *underscoredName = [applicationName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     
-    NSString *storeName = [underscoredName stringByAppendingPathExtension:@"sqlite"];
+    NSString *storeName = [underscoredName stringByAppendingPathExtension:kJCCoreDataStoreFileExt];
     
     return [[JCCoreData defaultStoreDirectory] URLByAppendingPathComponent:storeName];
 }
@@ -241,11 +235,16 @@ static JCCoreData *defaultData = nil;
     return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:[JCCoreData defaultContext]];
 }
 
-+ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
++ (instancetype)newInContext:(NSManagedObjectContext *)context
 {
-    return [NSEntityDescription entityForName:NSStringFromClass(self) inManagedObjectContext:context];
+    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context];
 }
 
+- (void)delete
+{
+    [self.managedObjectContext deleteObject:self];
+    [[JCCoreData defaultData] save];
+}
 
 + (NSArray *)findAllObjects
 {
@@ -269,6 +268,142 @@ static JCCoreData *defaultData = nil;
     
     return results;
 }
+
++ (NSFetchedResultsController *)fetchAllWithDelegate:(id <NSFetchedResultsControllerDelegate>)delegate sortedBy:(NSString *)sortTerm groupedBy:(NSString *)groupName cached:(BOOL)isCached
+{
+    NSManagedObjectContext *context = [JCCoreData defaultContext];
+    
+    // Create and configure a fetch request with the entity.
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [self entityDescriptionInContext:context];
+    [fetchRequest setEntity:entity];
+    
+    // Set Batch Size
+    [fetchRequest setFetchBatchSize:kJCCoreDataBatchSize];
+    
+    // Add sort descriptors
+    NSMutableArray *sortDescriptors = [NSMutableArray array];
+    BOOL ascending = YES;
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString * __strong sortKey in sortKeys)
+    {
+        NSArray * sortComponents = [sortKey componentsSeparatedByString:@":"];
+        if (sortComponents.count > 1)
+        {
+            sortKey = sortComponents[0];
+            ascending = [sortComponents[1] boolValue];
+        }
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+    }
+    
+	[fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSString *cacheName = nil;
+    if (isCached) {
+        cacheName = @"Root";
+    }
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:groupName cacheName:cacheName];
+    fetchedResultsController.delegate = delegate;
+    
+    NSError *error;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    
+    return fetchedResultsController;
+}
+
++ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
+{
+    return [NSEntityDescription entityForName:NSStringFromClass(self) inManagedObjectContext:context];
+}
+
+@end
+
+
+#pragma mark - NSFetchedResultsController
+
+@implementation NSFetchedResultsController (JCCoreData)
+
+- (NSUInteger)numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self sections] objectAtIndex:section];
+    
+    return [sectionInfo numberOfObjects];
+}
+
+@end
+
+#pragma mark - UITableViewController
+
+@implementation UITableViewController (JCCoreData)
+
+// UITableViewController's cell configuration method. This should be subclassed as this implementation does nothing.
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+/*
+ NSFetchedResultsController delegate methods to respond to additions, removals and so on.
+ */
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+}
+
 
 @end
 

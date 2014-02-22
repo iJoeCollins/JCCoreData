@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="MLPostFactor V0.3" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Entity" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Book" representedClassName="Book" syncable="YES">
+        <attribute name="author" attributeType="String" minValueString="1" defaultValueString="Author" syncable="YES"/>
+        <attribute name="copyright" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="title" attributeType="String" minValueString="1" defaultValueString="Title" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Entity" positionX="160" positionY="192" width="128" height="58"/>
+        <element name="Book" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

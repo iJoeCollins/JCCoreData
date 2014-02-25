@@ -50,6 +50,12 @@
 
 #pragma mark - Categories
 
+#pragma mark - NSManagedObjectContext
+
+@interface NSManagedObjectContext (JCCoreData)
+
+@end
+
 #pragma mark - NSManagedObject
 
 @interface NSManagedObject (JCCoreData)

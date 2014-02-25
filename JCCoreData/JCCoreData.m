@@ -226,6 +226,12 @@ static JCCoreData *defaultData = nil;
 
 #pragma mark - Categories
 
+#pragma mark - NSManagedObjectContext
+
+@implementation NSManagedObjectContext (JCCoreData)
+
+@end
+
 #pragma mark - NSManagedObject
 
 @implementation NSManagedObject (JCCoreData)

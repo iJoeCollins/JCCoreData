@@ -238,7 +238,7 @@ static JCCoreData *defaultData = nil;
 
 + (instancetype)new
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:[JCCoreData defaultContext]];
+    return [self newInContext:[JCCoreData defaultContext]];
 }
 
 + (instancetype)newInContext:(NSManagedObjectContext *)context
